@@ -8,7 +8,7 @@ import (
 )
 
 func GetAccountAPI(engine *gin.Engine) {
-	v1 := engine.Group("/api/v1alpha1")
+	v1 := engine.Group("/api/v1")
 	v1.Use(middleware.JWTAuth())
 
 	v1.GET("/account", handler.ListAccount)
