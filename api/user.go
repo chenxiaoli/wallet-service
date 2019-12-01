@@ -6,7 +6,8 @@ import (
 )
 
 // @Summary 登录
-// @Produce  json
+//@Accept  application/x-www-form-urlencoded
+// @Produce json
 // @Param username formData string true "username"
 // @Param password formData string true "password"
 // @Success 200 {string}  string

@@ -12,8 +12,11 @@ type AccountVo struct {
 	Available    string `json:"available"`
 	Hold         string `json:"hold"`
 }
-
-type LoginVo struct {
+type LoginReqVo struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+type LoginResVo struct {
 	Token string `json:"token"`
 }
 
