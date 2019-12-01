@@ -18,7 +18,7 @@ func JWTAuth() gin.HandlerFunc {
 		token := c.Request.Header.Get("Authorization")
 		if token == "" {
 			c.JSON(http.StatusOK, gin.H{
-				"status": -1,
+				"status": http.StatusUnauthorized,
 				"msg":    "请求未携带token，无权限访问",
 			})
 			c.Abort()
@@ -33,7 +33,7 @@ func JWTAuth() gin.HandlerFunc {
 		if err != nil {
 			if err == TokenExpired {
 				c.JSON(http.StatusOK, gin.H{
-					"status": -1,
+					"status": http.StatusUnauthorized,
 					"msg":    "授权已过期",
 				})
 				c.Abort()

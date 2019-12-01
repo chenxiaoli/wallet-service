@@ -5,7 +5,10 @@ import (
 )
 
 func RunHTTPServer(engine *gin.Engine) {
-
-	GetAccountAPI(engine)
+	engine.Group("auth")
+	{
+		GetAccountAPI(engine)
+		LoginAPI(engine)
+	}
 
 }

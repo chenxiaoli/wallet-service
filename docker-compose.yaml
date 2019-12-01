@@ -10,7 +10,7 @@ services:
     links:
       - mongo
     environment:
-      MONGODB_URL: mongodb://mongo:27017/IoT-admin
+      MONGODB_URL: mongodb://mongo:27017/wallet-service
   mongo:
     image: 'mongo:latest'
     container_name: 'mongo'

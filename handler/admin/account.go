@@ -1,4 +1,4 @@
-package handler
+package admin
 
 import (
 	"gopkg.in/mgo.v2"
@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// List all Account
-func ListAccount(c *gin.Context) {
+// list currency
+func ListCurrency(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
 	var accounts []models.Account
 	err := db.C(models.CollectionCustomer).Find(nil).All(&accounts)
@@ -27,10 +27,12 @@ func ListAccount(c *gin.Context) {
 		"data":   accounts,
 	})
 }
-func ListCoin(c *gin.Context) {
+
+// add currency
+func AddCurrency(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
-	var coins []models.Coin
-	err := db.C(models.CollectionCoin).Find(nil).All(&coins)
+	var accounts []models.Account
+	err := db.C(models.CollectionCustomer).Find(nil).All(&accounts)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": 500,
@@ -38,17 +40,19 @@ func ListCoin(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": 200,
 		"msg":    "success",
-		"data":   coins,
+		"data":   accounts,
 	})
 }
 
-func ListCurrency(c *gin.Context) {
+// add currency
+func UpdateCurrency(c *gin.Context) {
 	db := c.MustGet("db").(*mgo.Database)
-	var coins []models.Coin
-	err := db.C(models.CollectionCoin).Find(nil).All(&coins)
+	var accounts []models.Account
+	err := db.C(models.CollectionCustomer).Find(nil).All(&accounts)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": 500,
@@ -56,29 +60,30 @@ func ListCurrency(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": 200,
 		"msg":    "success",
-		"data":   coins,
+		"data":   accounts,
 	})
 }
 
-func Withdrawal(c *gin.Context) {
-
-	address, _ := c.GetPostForm("address")
-	value, _ := c.GetPostForm("value")
+// delete currency
+func DeleteCurrency(c *gin.Context) {
+	db := c.MustGet("db").(*mgo.Database)
+	var accounts []models.Account
+	err := db.C(models.CollectionCustomer).Find(nil).All(&accounts)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status": 500,
+			"msg":    err.Error(),
+		})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"address": address,
-		"value":   value,
+		"status": 200,
+		"msg":    "success",
+		"data":   accounts,
 	})
-}
-
-func GetBalance(c *gin.Context) {
-
-	coin, _ := c.GetPostForm("coin")
-	c.JSON(http.StatusOK, gin.H{
-		"address": coin,
-	})
-
 }
